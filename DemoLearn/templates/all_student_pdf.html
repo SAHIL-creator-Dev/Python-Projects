@@ -1,0 +1,37 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}Faculty view page{% endblock %}
+{% block top_head %} {% endblock %}
+{% block nav_bar %} {% endblock %}
+{% block body %}
+<div class="table-container">
+    <div class="table-caption">BATCH ({{sel_batch}})</div>
+    <table class="student-table">
+        <thead>
+            <tr>
+                <th>S.NO.</th>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th>Father Name</th>
+                <th>Branch</th>
+                <th>Sem/Year</th>
+                <th>Student Phone No</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for student in student_detail %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{student.ubter_roll_no}}</td>
+                                <td>{{student.full_name}}</td>
+                                <td>{{student.father_name}}</td>
+                                <td>{{student.branch}}</td>
+                                <td>{{student.sem}}/{{student.year}}</td>
+                                <td>{{student.phone_no}}</td>
+                            </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block home_footer %}{% endblock %}

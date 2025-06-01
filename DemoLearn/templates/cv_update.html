@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Details Form</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .alert {
+            padding: 20px;
+            background-color: rgb(39, 194, 70); /* Red */
+            color: white;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .closebtn {
+            margin-right: 4px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .alert_error {
+            margin-bottom: 4px;
+            padding: 10px;
+            font-style: italic;
+            background-color:  #f44336;
+            color: #f3dbdb;
+            width: 100%;
+            border: none;
+            border-radius: .5rem;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 10px auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-top: 12px;
+            color: #34495e;
+        }
+        input, textarea {
+            width: 96%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            border-color: #2980b9;
+            background: #fff;
+            outline: none;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            margin-top: 12px;
+            padding: 12px;
+            background: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+        .btn:hover {
+            background: #1c6690;
+        }
+        .btn-remove {
+            width: 20%;
+            background: #e74c3c;
+            margin-top: 5px;
+            font-size: 13px;
+            padding: 8px;
+        }
+        .btn-remove:hover {
+            background: #c0392b;
+        }
+        .dynamic-container {
+            margin-top: 10px;
+        }
+        .dynamic-container div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .dynamic-container input {
+            flex-grow: 1;
+        }
+        .save_btn{
+            margin-top:10px;
+            width: 100%;
+            background-color: #28a745; /* or #4CAF50 */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+   {% for student in student_details %}
+   {% for cv in cv_details %}
+    <div class="container">
+        <h2>Update yout CV Data</h2>
+        <form action="{% url "cv_update_logic" roll %}" method="post">
+            {% csrf_token %}
+            <label>About Me</label>
+            <textarea rows="4" name="about_me">{{cv.about_me}}</textarea>
+            
+            <label>Email</label>
+            <input type="email" value="{{student.email}}" name="email">
+            
+            <label>Skills</label>
+            <div id="skills" class="dynamic-container">
+                {% for skill in skills %}
+                <input type="text" name="skills[]" value="{{skill}}">
+                {% endfor %}
+            </div>
+            <button type="button" class="btn" onclick="addField('skills', 'Skill')">Add Skill</button>
+
+            <label>Hobbies</label>
+            <div id="hobbies" class="dynamic-container">
+                {% for hobby in hobbies %}
+                <input type="text" value="{{hobby}}" name="hobbies[]">
+                {% endfor %}
+            </div>
+            <button type="button" class="btn" onclick="addField('hobbies', 'hobby')">Add Hobbies</button>
+
+            <label>Projects</label>
+            <div id="projects" class="dynamic-container">
+                {% for project in projects %}
+                <input type="text" value="{{project}}"  name="projects[]">
+                {% endfor %}
+            </div>
+            <button type="button" class="btn" onclick="addField('projects', 'Project')">Add Project</button>
+
+            <label>Certificates</label>
+            <div id="certificates" class="dynamic-container">
+                {% for Certificate in certificates %}
+                <input type="text" value="{{Certificate}}" name="certificates[]">
+                {% endfor %}
+            </div>
+            <button type="button" class="btn" onclick="addField('certificates', 'Certificate')">Add Certificate</button>
+            <button type="submit" class="save_btn">save</button>
+        </form>
+    </div>
+   {% endfor %}
+   {% endfor %}
+   <script>
+        function addField(containerId, placeholderText) {
+            let container = document.getElementById(containerId);
+            let input = document.createElement("input");
+            input.type = "text";
+            input.name = containerId + "[]";
+            input.placeholder = `Enter ${placeholderText}`;
+            
+            let removeBtn = document.createElement("button");
+            removeBtn.innerText = "Remove";
+            removeBtn.classList.add("btn", "btn-remove");
+            removeBtn.type = "button";
+            removeBtn.onclick = function() { container.removeChild(div); };
+            
+            let div = document.createElement("div");
+            div.appendChild(input);
+            div.appendChild(removeBtn);
+            container.appendChild(div);
+        }
+    </script>
+</body>
+</html>

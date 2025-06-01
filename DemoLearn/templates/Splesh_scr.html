@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoNest - Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0d1117, #161b22);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            color: #f0f6fc;
+        }
+
+        /* Glowing Background Animation */
+        .glow-overlay {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 150, 0.2), rgba(0, 255, 255, 0.1), transparent);
+            animation: glow-move 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes glow-move {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.2); }
+        }
+
+        /* Unique Floating Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out, drift 16s infinite alternate linear, disco-glow 1.5s infinite alternate ease-in-out;
+            filter: blur(2px);
+            mix-blend-mode: screen;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-40px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50px); }
+        }
+
+        /* Faster Disco Glow Effect */
+        @keyframes disco-glow {
+            0% { opacity: 0.3; transform: scale(1); filter: blur(1px); }
+            50% { opacity: 1; transform: scale(1.2); filter: blur(2px); }
+            100% { opacity: 0.3; transform: scale(1); filter: blur(1px); }
+        }
+
+        /* Frosted Glass Container */
+        .typewriter-container {
+            position: relative;
+            z-index: 10;
+            padding: 40px 60px;
+            border-radius: 20px;
+        }
+
+        /* Typewriter Effect */
+        .typewriter-text {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffdde1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid rgba(255, 255, 255, 0.7);
+            width: 0;
+            animation: typing 3s steps(25, end) forwards, blinkCursor 0.8s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blinkCursor {
+            50% { border-color: transparent; }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #8ab4f8;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out 3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-overlay"></div>
+
+    <!-- Floating Particles -->
+    <script>
+        function createParticle() {
+            let particle = document.createElement("div");
+            particle.classList.add("particle");
+            
+            let size = Math.random() * 20 + 15; // Bubble size variation
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            particle.style.left = `${Math.random() * 100}vw`;
+
+            // Unique Gradient Colors
+            let colors = [
+                "radial-gradient(circle, rgba(255, 0, 150, 0.8), rgba(255, 0, 150, 0.2))",
+                "radial-gradient(circle, rgba(0, 255, 255, 0.8), rgba(0, 255, 255, 0.2))",
+                "radial-gradient(circle, rgba(255, 255, 0, 0.8), rgba(255, 255, 0, 0.2))",
+                "radial-gradient(circle, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0.2))",
+                "radial-gradient(circle, rgba(255, 165, 0, 0.8), rgba(255, 165, 0, 0.2))",
+                "radial-gradient(circle, rgba(138, 43, 226, 0.8), rgba(138, 43, 226, 0.2))"
+            ];
+            let randomColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.background = randomColor;
+
+            // Faster Disco Effect
+            let glowSpeed = Math.random() * 1 + 1; // Between 1s and 2s
+            particle.style.animation = `float ${Math.random() * 5 + 5}s infinite ease-in-out, 
+                                        drift ${Math.random() * 10 + 8}s infinite alternate linear, 
+                                        disco-glow ${glowSpeed}s infinite alternate ease-in-out`;
+
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 16000);
+        }
+
+        setInterval(createParticle, 200);
+    </script>
+
+    <div class="typewriter-container">
+        <h1 class="typewriter-text">InfoNest</h1>
+        <p class="subtitle">Your Centralized Data Access Portal</p>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = "{% url 'home' %}";
+        }, 6000);
+    </script>
+</body>
+</html>

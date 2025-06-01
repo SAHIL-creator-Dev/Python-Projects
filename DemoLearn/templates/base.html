@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static "style.css" %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>{% block title %}Home{% endblock %}</title>
+  </head>
+  <body>
+    {% block base_top %}
+    <div class="HOME">
+      <div class="top">
+        {% block top_head %}
+        <div class="top_h">
+            <img src="{% static "logo.png" %}" alt="Government Polytechnic Srinagar Logo">
+            <div>
+                <h1>Government Polytechnic Srinagar (Garhwal), Uttarakhand</h1>
+                <p>Affiliated to Uttarakhand Board of Technical Education Roorkee (UBTER) and Approved by AICTE</p>
+            </div>
+        </div>
+          {% endblock %}
+        </div>
+        {% block nav_bar %}
+        <header class="home_header">
+          <nav>
+            <div class="nav_bar">
+              <div class="logo">
+                <a class="logo_text" href="#"><img src="{% static "logo1.png" %}" alt="InfoNest" />InfoNest: A Centralized Data Access Portal</a>
+              </div>
+              
+              <ul class="link">
+                <li><a href="/home" class="active">HOME</a></li>
+                <li><a class="active">ABOUT INSTITUTE <i style="padding-left: 3px" class="fas fa-caret-down"></i></a>
+                  <div class="cources_menu">
+                    <ul>
+                      <li><a href="/about_us">About Us</a></li>
+                      <li><a href="/staff">Staff Member</a></li>
+                      <li><a href="/gallery">Gallery</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a href="#" class="active" id="cources">COURSES <i style="padding-left: 3px" class="fas fa-caret-down"></i></a>
+                    <div class="cources_menu" >
+                    <ul>
+                      <li><a href="">Civil Engineering</a></li>
+                      <li><a href="">Electrical Engineering</a></li>
+                      <li><a href="">Electronics</a></li>
+                      <li><a href="/course_detail_cse">Computer Science & Engineering</a></li>
+                      <li><a href="/course_detail_it">Information Technology</a></li>
+                    </ul>
+                  </div>
+                </li>
+                
+                <li><a>STUDENT PROFILE <i style="padding-left: 3px" class="fas fa-caret-down"></i></a>
+                  <div class="cources_menu">
+                    <ul>
+                      <li><a href="/login">LOGIN</a></li>
+                      <li><a href="/register">SIGN-UP</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a href="/student" target="_blank">STUDENT REGISTRATION</a></li>
+              </ul>
+
+              <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+              </div>
+            </div>
+          </nav>
+          <div class="dropdown_menu open">
+            <li><a href="/" class="active">HOME</a></li>
+            <li><a href="/login">LOGIN</a></li>
+            <li><a href="/register">REGISTER</a></li>
+            <li><a href="/student" target="_blank">STUDENT REGISTRATION</a></li>
+          </div>
+        </header>
+        {% endblock %}
+      </div>
+    </div>
+    {% block marq %}
+      <div class="marq">
+        <span>WELCOME</span>
+        <marquee behavior="scroll" direction="left">{% block note %}Govt. Polytechnic Srinagar (Garhwal){% endblock %} </marquee>
+      </div>
+    {% endblock %}
+    {% endblock %}
+    
+    {% block body %} {% endblock %}
+    {% block home_footer %}
+    <div class="home_footer">
+    <div class="footer_container">
+      <div class="footer-section" id="footer-section1">
+        <h2>Government Polytechnic, Srinagar(Garhwal)</h2>
+        <p>Established in 1968, Government Polytechnic Srinagar Garhwal is affiliated with the Uttarakhand Board of Technical Education. The institute is committed to academic excellence, offering top-notch diploma engineering programs.</p>
+        <img id="facebook_img" src="{% static "facebook_img.png" %}" alt="">
+        <img id="insta_img" src="{% static "insta_img.png" %}" alt="">
+        <img id="whatsapp_img" src="{% static "whatsapp_img.png" %}" alt="">
+        <img id="linkedin_img" src="{% static "linkedin_img.png" %}" alt="">
+        <img id="youtube_img" src="{% static "youtube_img.png" %}" alt="">
+      </div>
+      <div class="footer-section" id="footer-section2">
+        <h2>Quick Links</h2>
+        <ul>
+          <li>><a href="">  UBTE, Roorkee</a></li>
+          <li>><a href="">  Directorate, Srinagar</a></li>
+          <li>><a href="">  AICTE</a></li>
+          <li>><a href="">  IRDT</a></li>
+          <li>><a href="">  PCI</a></li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-section3">
+      <h2>Get in Touch</h2>
+      <ul class="footer-content">
+        <li><i class="fas fa-envelope"></i> <b>Email:</b> principal_gps@rediffmail.com</li>
+        <li><i class="fas fa-phone"></i> <b>Phone:</b> 01346-297256</li>
+        <li><i class="fas fa-map-marker-alt"></i> <b>Location:</b> 30.22°N 78.78°E at the left bank of river Alaknanda</li>
+      </ul>
+    </div>
+
+    </div>
+  </div>
+    {% endblock home_footer %}
+  {% block script_side %}
+  <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="{% static "script.js" %}"></script>
+  {% endblock %}
+  </body>
+</html>

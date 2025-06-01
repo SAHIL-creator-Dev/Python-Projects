@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block body %} {% comment %} {% block title %}Home{%
+endblock %} {% endcomment %}
+{% block base_top %}
+{% endblock %}
+
+<nav class="home_page_navbar">
+    <div class="home_page_logo">
+        <img src="{% static "logo1.png" %}" alt="Logo">
+        InfoNest
+    </div>
+    <ul class="home_page_nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a>About <i style="padding-left: 3px" class="fas fa-caret-down"></i></a>
+          <div class="cources_menu">
+            <ul>
+              <li><a href="/about_us">About Institute</a></li>
+              <li><a href="/staff">Staff Member</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a>Courses <i style="padding-left: 3px" class="fas fa-caret-down"></i></a>
+          <div class="cources_menu" >
+            <ul>
+              <li><a href="">Civil Engineering</a></li>
+              <li><a href="">Electrical Engineering</a></li>
+              <li><a href="">Electronics</a></li>
+              <li><a href="/course_detail_cse">Computer Science & Engineering</a></li>
+              <li><a href="/course_detail_it">Information Technology</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a>Student Profile <i style="padding-left: 3px" class="fas fa-caret-down"></i></a>
+          <div class="cources_menu">
+            <ul>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Sign-up</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="/student" target="_blank">Student Registration</a></li>
+    </ul>
+</nav>
+    
+    <div class="home_page_slider">
+        <div class="home_page_slide active">
+            <img src="{% static "slider_img/slide_item1.jpg" %}" alt="">
+            <div class="home_page_slider-content">
+                <h1>Engineering is the closest thing to magic that exists in the world.</h1>
+                <p>– Elon Musk</p>
+            </div>
+        </div>
+        <div class="home_page_slide">
+            <img src="{% static "slider_img/slide_item2.jpg" %}" alt="">
+            <div class="home_page_slider-content">
+                <h1>Success is not final, failure is not fatal: It is the courage to continue that counts.</h1>
+                <p>– Winston Churchill</p>
+            </div>
+        </div>
+        <div class="home_page_slide">
+            <img src="{% static "slider_img/slide_item3.jpg" %}" alt="">
+            <div class="home_page_slider-content">
+                <h1>Software is a great combination between artistry and engineering.</h1>
+                <p>– Bill Gates</p>
+            </div>
+        </div>
+        <div class="home_page_slider-controls">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="home_page_progress-bar"></div>
+    </div>
+  <!-- More Content Container with Blocks -->
+  <div class="more_container_all">
+    <div class="more_content_all">
+    <div class="more_container_outer">
+    <!-- Top Bar -->
+    <div class="top-bar">More Content</div>
+      <div class="more_content_container_body">
+        <div class="more_content_container">
+        <!-- Block 2 -->
+        <div class="more_container_block">
+          <img src="{% static "syllabus_img.jpg" %}" alt="Image 2">
+          <div class="more_container_content">
+            <h4>Syllabus</h4>
+            <p>
+              A. Diploma Engineering Courses<br>
+              B. Diploma Other Courses
+            </p>
+            <a href="https://irdtuttarakhand.org.in/irdt1/irdt-download.aspx" class="view-button">View Syllabus</a>
+          </div>
+        </div>
+        <!-- Block 3 -->
+        <div class="more_container_block" id="more_container_block3">
+          <img src="{% static "more_content_img/more_content_img2.png" %}" alt="Image 3">
+          <div class="more_container_content">
+            <h4>Addmission</h4>
+            <p >
+              > How to Apply for Admission? <br>
+              > Documents Required for Admission
+            </p>
+            <a href="/addmission" class="view-button">View Details</a>
+          </div>
+        </div>
+        <!-- Block 4 -->
+        <div class="more_container_block">
+          <img src="{% static "books.jpg" %}" alt="Image 4">
+          <div class="more_container_content">
+            <h4>Books</h4>
+            <p>i) Information Technology<br>ii) Computer Science Engineering</p>
+            <a href="{% url "books_page" %}" class="view-button">View Details</a>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+    <hr class="section-divider">
+    
+
+  <div class="event_section_outer">
+        <div class="event_section_body">
+            
+            <!-- News Section -->
+            <div class="event_section news">
+                <h2 class="Event_heading">News</h2>
+                <div class="event_content">
+                    <marquee behavior="scroll" direction="up" scrollamount="4">
+                        <ul>
+                            {% for news in news_management %}
+                            <li>
+                                <span class="event_icon">📰</span>
+                                {{news.news_title}}: {{news.news_description}}
+                                <img src="{% static 'new_img.gif' %}" alt="New">
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </marquee>
+                </div>
+            </div>
+
+            <!-- Upcoming Events Section -->
+            <div class="event_section events">
+                <h2 class="Event_heading">Upcoming Events</h2>
+                <div class="event_content">
+                    <marquee behavior="scroll" direction="up" scrollamount="4">
+                        <ul>
+                            {% for event in event_management %}
+                            <li>
+                                <span class="event_icon">📅</span>
+                                {{event.event_title}}: {{event.event_description}}
+                                <img src="{% static 'new_img.gif' %}" alt="New">
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </marquee>
+                </div>
+            </div>
+
+            <!-- Notice Board Section -->
+            <div class="event_section notice">
+                <h2 class="Event_heading">Notice Board</h2>
+                <div class="event_content">
+                    <marquee behavior="scroll" direction="up" scrollamount="4">
+                        <ul>
+                          {% for notice in notice_management %}
+                          <li><span class="event_icon">📢</span> {{notice.notice_title}}: {{notice.notice_description}} <img src="{% static 'new_img.gif' %}" alt="New"></li>
+                          {% endfor %}
+                        </ul>
+                    </marquee>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <hr class="section-divider">
+  <div class="about_college">
+    <div class="about_us_home">
+    <img src="{% static "InfoNest_Img.png" %}" alt="">
+    <div class="about_us_home_heading">
+      <h2 class="Event_heading">Welcome to InfoNest!</h2>
+      <p>
+Your all-in-one academic companion, InfoNest is a dynamic web portal designed to simplify and enhance the experience of students, faculty, and administrators. Whether you're a student updating your academic profile, generating a professional CV, or tracking your academic progress — or a faculty member managing student records — InfoNest brings everything to your fingertips. With dedicated dashboards, real-time notice and event updates, a fully functional admin panel, and a secure login system, the platform ensures seamless communication and efficient data management across your institution. Discover a smarter, faster, and more intuitive way to manage academic life — only at InfoNest!</p>
+      <div class="principal_sign">
+        <h4 style="font-size: 20px;margin-top:8px;margin-bottom:3px">We’re glad to have you here</h4>
+        <h5 style="font-style:italic">— everything you need is just a click away!</h5>
+      </div>
+    </div>
+  </div>
+  </div>
+    <hr class="section-divider">
+    <div class="Importent_links_body">
+      <div class="importent_links_box">
+      <h2 class="Event_heading" style="margin-bottom:20px">Important Links</h2>
+      <div class="importent_link_section_slider">
+        <div class="importent_link_section_slide-track">
+          <div class="importent_link_section_slide"><a href="https://eservices.uk.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img1.png" %}" alt="Image 1"></a></div>
+          <div class="importent_link_section_slide"><a href="https://ubter.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img2.png" %}" alt="Image 2"></a></div>
+          <div class="importent_link_section_slide"><a href="https://scholarships.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img3.png" %}" alt="Image 3"></a></div>
+          <div class="importent_link_section_slide"><a href="https://uktnp.in/#/Home" target="_blank"><img src="{% static "/Importent_links/importent_Links_img4.png" %}" alt="Image 4"></a></div>
+          <div class="importent_link_section_slide"><a href="https://www.aicte-india.org/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img5.png" %}" alt="Image 5"></a></div>
+          <div class="importent_link_section_slide"><a href="https://www.pci.nic.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img6.png" %}" alt="Image 6"></a></div>
+          <div class="importent_link_section_slide"><a href="https://aishe.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img7.png" %}" alt="Image 7"></a></div>
+          <div class="importent_link_section_slide"><a href="https://www.nbaind.org/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img8.png" %}" alt="Image 8"></a></div>
+          <div class="importent_link_section_slide"><a href="https://ekosh.uk.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img9.png" %}" alt="Image 9"></a></div>
+          
+          <!-- Duplicate images for smooth looping -->
+          <div class="importent_link_section_slide"><a href="https://eservices.uk.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img1.png" %}" alt="Image 1"></a></div>
+          <div class="importent_link_section_slide"><a href="https://ubter.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img2.png" %}" alt="Image 2"></a></div>
+          <div class="importent_link_section_slide"><a href="https://scholarships.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img3.png" %}" alt="Image 3"></a></div>
+          <div class="importent_link_section_slide"><a href="https://uktnp.in/#/Home" target="_blank"><img src="{% static "/Importent_links/importent_Links_img4.png" %}" alt="Image 4"></a></div>
+          <div class="importent_link_section_slide"><a href="https://www.aicte-india.org/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img5.png" %}" alt="Image 5"></a></div>
+          <div class="importent_link_section_slide"><a href="https://www.pci.nic.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img6.png" %}" alt="Image 6"></a></div>
+          <div class="importent_link_section_slide"><a href="https://aishe.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img7.png" %}" alt="Image 7"></a></div>
+          <div class="importent_link_section_slide"><a href="https://www.nbaind.org/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img8.png" %}" alt="Image 8"></a></div>
+          <div class="importent_link_section_slide"><a href="https://ekosh.uk.gov.in/" target="_blank"><img src="{% static "/Importent_links/importent_Links_img9.png" %}" alt="Image 9"></a></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    
+{% endblock %}

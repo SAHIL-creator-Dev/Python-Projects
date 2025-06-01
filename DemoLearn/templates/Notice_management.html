@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Event Management</title>
+    <link rel="stylesheet" href="{% static "/Content_management/event.css" %}">
+</head>
+<body>
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+            {{ message }}
+        </div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <!-- Back Button -->
+    <a href="/admin_panel" class="back-button">
+        ← <span>Back</span>
+    </a>
+
+    <div class="container">
+        <h2>Notices Management</h2>
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert_error">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+                {{ message }}
+            </div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="event-form">
+                <input type="text" placeholder="Enter Notice Title" name="notice-title">
+                <textarea placeholder="Enter Notice Description" name="notice-description"></textarea>
+                <button>Add Notice</button>
+            </div>
+        </form>
+        <div class="event-list">
+            <h3>Added Notices</h3>
+            {% for notice in notice_management %}
+            <div class="event-item">
+                <div class="event-details">
+                    <strong>{{notice.notice_title}}</strong>
+                    <p>{{notice.notice_description}}</p>
+                </div>
+                <div class="event-actions">
+                    <form action="{% url "delete_notice" notice.id %}">
+                        <button type="submit">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>

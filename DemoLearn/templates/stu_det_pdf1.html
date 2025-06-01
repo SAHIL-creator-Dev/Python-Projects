@@ -1,0 +1,184 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static '/Styles/profile.css' %}" />
+  </head>
+  <body>
+    <div class="top_h">
+        <div>
+            <h1>Government Polytechnic Srinagar (Garhwal), Uttarakhand</h1>
+        </div>
+    </div>
+    <div class="student-profile-container">
+      {% for student in student_detail %}
+        <div class="student-profile">
+            <div class="profile-header">
+                <div class="profile-summary">
+                    <p><strong>Branch:</strong> {{student.branch}}</p>
+                    <br />
+                    <p>
+                    <strong>Year:</strong> {{student.year}} |
+                    <strong>Semester:</strong> {{student.sem}}
+                    </p>
+                    <br>
+                </div>
+            </div>
+            <hr>
+            <div class="personal-details">
+                <h2>Personal Details</h2>
+                <table>
+                    <tr>
+                    <td><strong>Name:</strong></td>
+                    <td><h1 class="name_h1">{{student.full_name.upper}}</h1></td>
+                    </tr>
+                    <tr>
+                    <td><strong>UBTER Roll No:</strong> </td>
+                    <td><h1 class="name_h1">{{student.ubter_roll_no}}</h1></td>
+                    </tr>
+                    <tr>
+                    <td><strong>Date of Birth:</strong></td>
+                    <td>{{student.dob}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Category:</strong></td>
+                    <td>{{student.category}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Current Address:</strong></td>
+                    <td>{{student.current_stu_address}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Permanent Address:</strong></td>
+                    <td>{{student.permanent_stu_address}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Phone Number:</strong></td>
+                    <td>{{student.phone_no}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Aadhar No:</strong></td>
+                    <td>{{student.adhar_no}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Email:</strong></td>
+                    <td>{{student.email}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Gender:</strong></td>
+                    <td>{{student.gender}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="parents-details">
+                <h2>Parents' Information</h2>
+                <table>
+                    <tr>
+                    <td><strong>Father's Name:</strong></td>
+                    <td>{{student.father_name}}</td>
+                    <td><strong>Father's Occupation:</strong></td>
+                    <td>{{student.father_occupation}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Mother's Name:</strong></td>
+                    <td>{{student.mother_name}}</td>
+                    <td><strong>Mother's Occupation:</strong></td>
+                    <td>{{student.mother_occupation}}</td>
+                    </tr>
+                    <tr>
+                    <td><strong>Parents' Phone Number:</strong></td>
+                    <td>{{student.phone_no}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="previous-academic">
+                <h2>Previous Academic History</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>School Name</th>
+                        <th>Board</th>
+                        <th>Passing Year</th>
+                        <th>Percentage/Marks</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>10th</td>
+                        <td>{{student.high_sc_name}}</td>
+                        <td>{{student.sel_high_board}}</td>
+                        <td>{{student.high_sc_pass_year}}</td>
+                        <td>{{student.high_sc_per}}%</td>
+                    </tr>
+                    <tr>
+                        <td>12th</td>
+                        <td>{{student.inter_col_name}}</td>
+                        <td>{{student.sel_inter_board}}</td>
+                        <td>{{student.inter_col_pass_year}}</td>
+                        <td>{{student.inter_per}}%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="current-academic">
+                <h2>Current Academic Information</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Semester</th>
+                        <th>Marks</th>
+                        <th>CGPA</th>
+                        <th>Percentage</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td rowspan="2">1st Year</td>
+                        <td>1st Semester</td>
+                        <td>{{student.first_sem_marks}}</td>
+                        <td rowspan="2">{{student.first_year_tot_cgpa}}</td>
+                        <td rowspan="2">{{student.first_year_tot_per}}%</td>
+                    </tr>
+                    <tr>
+                        <td>2nd Semester</td>
+                        <td>{{student.second_sem_marks}}</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">2nd Year</td>
+                        <td>3rd Semester</td>
+                        <td>{{student.third_sem_marks}}</td>
+                        <td rowspan="2">{{student.second_year_tot_cgpa}}</td>
+                        <td rowspan="2">{{student.second_year_tot_per}}%</td>
+                    </tr>
+                    <tr>
+                        <td>4th Semester</td>
+                        <td>{{student.forth_sem_marks}}</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">3rd Year</td>
+                        <td>5th Semester</td>
+                        <td>{{student.fifth_sem_marks}}</td>
+                        <td rowspan="2">{{student.third_year_tot_cgpa}}</td>
+                        <td rowspan="2">{{student.third_year_tot_per}}%</td>
+                    </tr>
+                    <tr>
+                        <td>6th Semester</td>
+                        <td>{{student.sixth_sem_marks}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+    <hr>
+  </body>
+</html>

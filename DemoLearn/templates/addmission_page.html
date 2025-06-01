@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav_bar %}{% endblock %}
+{% block body %}
+ <!-- Admission Main Content Div -->
+    <div class="admission-main-content">
+
+        <!-- Image Section -->
+        
+       
+        <section class="admission-steps">
+            <h2>Welcome to Our Polytechnic College Admission Portal!</h2>
+            <p>We are excited to have you join our esteemed institution. Below is a comprehensive guide on how to complete your admission process at our Polytechnic College.</p>
+                
+            
+            <h2>How to Apply for Admission</h2>
+            <ol>
+                <li><strong>Check Eligibility:</strong> Ensure you meet the eligibility criteria for the course you wish to apply for.</li>
+                <li><strong>Fill Out the Online Application Form:</strong> Visit our <a href="#">Online Admission Portal</a> to begin the application process.</li>
+                <li><strong>Submit Required Documents:</strong> Upload scanned copies of all necessary documents.</li>
+                <li><strong>Pay the Application Fee:</strong> Proceed with payment through secure online methods.</li>
+                <li><strong>Entrance Exam (If Applicable):</strong> Appear for the entrance exam (if required).</li>
+                <li><strong>Admission Confirmation:</strong> Receive confirmation and proceed with fee payment for course enrollment.</li>
+                <li><strong>Orientation:</strong> Attend the orientation program and get to know more about the college.</li>
+            </ol>
+                
+    
+            <h2>Documents Required for Admission</h2>
+
+            <form>
+                <h2>प्रवेश हेतु पाठ्यक्रम विवरण</h2>
+                <table>
+                    <tr>
+                        <th>पाठ्यक्रम कोड</th>
+                        <th>पाठ्यक्रम का नाम</th>
+                        <th>अवधि</th>
+                        <th>शैक्षिक अहर्ता</th>
+                        <th>परीक्षा विषय एवं प्रतिशत</th>
+                    </tr>
+                    <tr>
+                        <td>E</td>
+                        <td>डिप्लोमा इन इंजीनियरिंग / टेक्नोलॉजी</td>
+                        <td>तीन वर्ष</td>
+                        <td>10वीं उत्तीर्ण (35% अंक)</td>
+                        <td>गणित - 50%, विज्ञान - 50%</td>
+                        </tr>
+                        <tr>   
+                            <td>P</td>
+                            <td>फार्मेसी डिप्लोमा</td>
+                            <td>दो वर्ष</td>
+                            <td>10+2 (भौतिकी, रसायन शास्त्र, गणित/जीवविज्ञान)</td>
+                            <td>भौतिकी, रसायन शास्त्र - 50%, गणित/जीवविज्ञान - 50%</td>
+                        </tr>
+                        <tr>
+                        <td>H</td>
+                        <td>होटल मैनेजमेंट एवं कैटरिंग टेक्नोलॉजी</td>
+                        <td>तीन वर्ष</td>
+                        <td>10+2 (45% अंक, आरक्षित वर्ग के लिए 40%)</td>
+                        <td>होटल एवं कैटरिंग मैनेजमेंट - 50%, अंग्रेजी - 25%, तार्किक योग्यता - 25%</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>मार्केटिंग एवं सेल्स मैनेजमेंट</td>
+                        <td>तीन वर्ष</td>
+                        <td>10+2 उत्तीर्ण</td>
+                        <td>व्यवसाय अध्ययन - 30%, अंग्रेजी - 30%, तार्किक योग्यता - 40%</td>
+                    </tr>
+                    <tr>
+                        <td>G</td>
+                        <td>पी.जी. डिप्लोमा इन कंप्यूटर एप्लीकेशन</td>
+                        <td>एक वर्ष</td>
+                        <td>स्नातक उत्तीर्ण</td>
+                        <td>कंप्यूटर एप्लीकेशन - 30%, तार्किक योग्यता - 30%, सामान्य ज्ञान - 40%</td>
+                    </tr>
+                    <tr>
+                        <td>T</td>
+                        <td>टेक्सटाइल डिजाइनिंग डिप्लोमा</td>
+                        <td>तीन वर्ष</td>
+                        <td>10वीं उत्तीर्ण (35% अंक)</td>
+                        <td>डिजाइन एवं पैटर्न - 40%, ड्राइंग - 30%, तार्किक योग्यता - 30%</td>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>एग्रीकल्चर डिप्लोमा</td>
+                        <td>दो वर्ष</td>
+                        <td>10+2 उत्तीर्ण</td>
+                        <td>कृषि विज्ञान - 40%, भौतिकी - 30%, रसायन शास्त्र - 30%</td>
+                    </tr>
+                </table>
+                <div class="note">
+                    <p><strong>नोट:</strong></p>
+                    <p>1. उपरोक्त पाठ्यक्रमों में प्रवेश हेतु प्रवेश परीक्षा विषय के लिए निर्धारित पाठ्यक्रमों से प्रश्न पूछे जाएंगे।</p>
+                    <p>2. फार्मेसी पाठ्यक्रम हेतु न्यूनतम अहर्ता प्राप्त करने के उपरांत मेरिट के आधार पर प्रवेश दिया जाएगा। परीक्षा योजना के लिए पाठ्यक्रम अनुसार गणित/जीवविज्ञान में से कोई एक विषय चुनना अनिवार्य होगा।</p>
+                    <p>3. होटल मैनेजमेंट एवं कैटरिंग टेक्नोलॉजी पाठ्यक्रम में महिलाओं/पुरुष अभ्यर्थियों के लिए न्यूनतम शारीरिक मापदंड होना आवश्यक है। पुरुष अभ्यर्थियों की न्यूनतम ऊंचाई 160 सेमी तथा महिला अभ्यर्थियों की न्यूनतम ऊंचाई 150 सेमी होनी चाहिए।</p>
+                    <p>4. अन्य पाठ्यक्रमों हेतु प्रवेश परीक्षा के माध्यम से ही प्रवेश दिया जाएगा। (प्रवेश पात्रता गणित एवं विज्ञान विषयक परीक्षा से प्राप्त अंकों के आधार पर होगी।)</p>
+                </div>
+                <h2>विशेष जानकारी एवं शुल्क विवरण</h2>
+                <p><strong>फीस विवरण:</strong> विभिन्न पाठ्यक्रमों के लिए ट्यूशन फीस एवं अन्य शुल्क निर्धारित संस्थानों द्वारा लागू किया जाएगा। सामान्यतः फीस प्रति वर्ष ₹19000 होती है, जिसमें परीक्षा शुल्क ₹2500 अतिरिक्त होगा।</p>
+                <h3>प्रवेश हेतु आरक्षण</h3>
+                <table>
+                    <tr>
+                        <th>श्रेणी</th>
+                        <th>आरक्षित स्थान</th>
+                        <th>कोड</th>
+                    </tr>
+                    <tr>
+                        <td>अनुसूचित जाति (SC)</td>
+                        <td>19%</td>
+                        <td>SC</td>
+                    </tr>
+                    <tr>
+                        <td>अनुसूचित जनजाति (ST)</td>
+                        <td>4%</td>
+                        <td>ST</td>
+                    </tr>
+                    <tr>
+                        <td>अन्य पिछड़ा वर्ग (OBC)</td>
+                        <td>14%</td>
+                        <td>OBC</td>
+                    </tr>
+                    <tr>
+                        <td>NCC, सैनिक आश्रित</td>
+                        <td>3%</td>
+                        <td>NCC</td>
+                    </tr>
+                    <tr>
+                        <td>स्वतंत्रता संग्राम सेनानी (DFF)</td>
+                        <td>2%</td>
+                        <td>DFF</td>
+                    </tr>
+                    <tr>
+                        <td>माउंटेनियरिंग (MP)</td>
+                        <td>5%</td>
+                        <td>MP</td>
+                    </tr>
+                    <tr>
+                        <td>विकलांग (PH)</td>
+                        <td>3%</td>
+                        <td>PH</td>
+                    </tr>
+                    <tr>
+                        <td>महिलाएं (WO)</td>
+                        <td>30%</td>
+                        <td>WO</td>
+                    </tr>
+            
+                </table>
+                
+            </form>
+    
+            <h2>Frequently Asked Questions (FAQs)</h2>
+            <dl>
+                <dt>Q1: How long does the admission process take?</dt>
+                <dd>A: The admission process takes around 2-3 weeks after the entrance exam results are declared.</dd>
+                <dt>Q2: Can I apply offline?</dt>
+                <dd>A: The admissions are online only. Please visit our online portal to apply.</dd>
+                <dt>Q3: Is there any scholarship available?</dt>
+                <dd>A: Yes, we offer scholarships for meritorious students and those from economically weaker sections.</dd>
+            </dl>
+        
+
+            <h2>Contact Information</h2>
+            <p>If you need help during the admission process or have any questions, feel free to reach out to our Admissions Team.</p>
+            <p><strong>Phone:</strong> [Your College Phone Number]</p>
+            <p><strong>Email:</strong> [Your College Admission Email]</p>
+            <p><strong>Address:</strong> [Your College Address]</p>
+            
+        </section>
+
+    </div> <!-- End of Admission Main Content Div -->
+
+{% endblock %}

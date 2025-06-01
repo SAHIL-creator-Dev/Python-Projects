@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<div class="staff_img_con">
+    <div class="all_staff">
+        {% for staff in staff_all_data %}
+        <div class="staff_img">
+            <div>
+                <img src="{{staff.staff_img.url}}" alt="">
+            </div>
+            <div class="staff_con"><h3 style="text-align:center;">
+                <a>{{staff.staff_name}}</a></h3>
+                <p style="font-style:italic;text-align:center">({{staff.staff_role}})</p>
+            </div>
+        </div>
+        {% comment %} {% empty %}
+        <p>No images found.</p> {% endcomment %}
+        {% endfor %}
+        
+    </div>
+</div>
+{% endblock body %}

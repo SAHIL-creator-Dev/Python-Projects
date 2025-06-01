@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav_bar %}{% endblock %}
+{% block title %}Student's Profile{% endblock %}
+{% block body %}
+<div class="all_student_detail"> 
+    {% for student in student_detail %}
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-image">
+                        <img src="{{student.img.url}}" alt="Student Image">
+                    </div>
+                    <div class="profile-info">
+                        <h1>{{student.full_name.upper}}  </h1>
+                        <p>{{student.branch}}</p>
+                        <div class="roll-branch">
+                            <span>UBTER Roll No: {{student.ubter_roll_no}}</span>
+                            <span>Year: {{student.year}} | Semester: {{student.sem}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <!-- Personal Information -->
+                    <div class="profile-section">
+                        <h2>Personal Information</h2>
+                        <div class="info-grid">
+                            <div class="info-item"><strong>Date of Birth:</strong> {{student.dob}}</div>
+                            <div class="info-item"><strong>Category:</strong> {{student.category}}</div>
+                            <div class="info-item"><strong>Current Address:</strong> {{student.current_stu_address}}</div>
+                            <div class="info-item"><strong>Permanent Address:</strong> {{student.permanent_stu_address}}</div>
+                            <div class="info-item"><strong>Phone Number:</strong> {{student.phone_no}}</div>
+                            <div class="info-item"><strong>Aadhar No:</strong> {{student.adhar_no}}</div>
+                            <div class="info-item"><strong>Email:</strong> {{student.email}}</div>
+                            <div class="info-item"><strong>Gender:</strong> {{student.gender}}</div>
+                        </div>
+                    </div>
+
+                    <!-- Parents' Information -->
+                    <div class="profile-section">
+                        <h2>Parents' Information</h2>
+                        <div class="info-grid">
+                            <div class="info-item"><strong>Father's Name:</strong> {{student.father_name}}</div>
+                            <div class="info-item"><strong>Mother's Name:</strong> {{student.mother_name}}</div>
+                            <div class="info-item"><strong>Parents' Phone Number:</strong> {{student.phone_no}}</div>
+                            <div class="info-item"><strong>Father's Occupation:</strong> {{student.father_occupation}}</div>
+                            <div class="info-item"><strong>Mother's Occupation:</strong> {{student.mother_occupation}}</div>
+                        </div>
+                    </div>
+
+                    <!-- School History -->
+                    <div class="profile-section">
+                        <h2>Previous Academic History</h2>
+                        <table class="school-table">
+                            <thead>
+                                <tr>
+                                    <th>Level</th>
+                                    <th>School Name</th>
+                                    <th>Board</th>
+                                    <th>Passing Year</th>
+                                    <th>Percentage/Marks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10th</td>
+                                    <td>{{student.high_sc_name}}</td>
+                                    <td>{{student.sel_high_board}}</td>
+                                    <td>{{student.high_sc_pass_year}}</td>
+                                    <td>{{student.high_sc_per}}%</td>
+                                </tr>
+                                <tr>
+                                    <td>12th</td>
+                                    <td>{{student.inter_col_name}}</td>
+                                    <td>{{student.sel_inter_board}}</td>
+                                    <td>{{student.inter_col_pass_year}}</td>
+                                    <td>{{student.inter_per}}%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Academic Information -->
+                    <div class="profile-section">
+                        <h2>Current Academic Information</h2>
+
+                        <!-- Academic Performance Table -->
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Semester</th>
+                                    <th>Marks</th>
+                                    <th>CGPA</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">1st Year</td>
+                                    <td>1st Semester</td>
+                                    <td>{{student.first_sem_marks}}</td>
+                                    <td rowspan="2">{{student.first_year_tot_cgpa}}</td>
+                                    <td rowspan="2">{{student.first_year_tot_per}}%</td>
+                                </tr>
+                                <tr>
+                                    <td>2nd Semester</td>
+                                    <td>{{student.second_sem_marks}}</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">2nd Year</td>
+                                    <td>3rd Semester</td>
+                                    <td>{{student.third_sem_marks}}</td>
+                                    <td rowspan="2">{{student.second_year_tot_cgpa}}</td>
+                                    <td rowspan="2">{{student.second_year_tot_per}}%</td>
+                                </tr>
+                                <tr>
+                                    <td>4th Semester</td>
+                                    <td>{{student.forth_sem_marks}}</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">3rd Year</td>
+                                    <td>5th Semester</td>
+                                    <td>{{student.fifth_sem_marks}}</td>
+                                    <td rowspan="2">{{student.third_year_tot_cgpa}}</td>
+                                    <td rowspan="2">{{student.third_year_tot_per}}%</td>
+                                </tr>
+                                <tr>
+                                    <td>6th Semester</td>
+                                    <td>{{student.sixth_sem_marks}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block home_footer %}{% endblock %}

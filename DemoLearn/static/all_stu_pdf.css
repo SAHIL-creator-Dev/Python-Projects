@@ -1,0 +1,58 @@
+@page {
+    size: A4 portrait;
+    margin: 1.5cm;
+}
+
+@media print and (orientation: landscape) {
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+    
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.top_h{
+    margin: 0;
+    color: #f0e68c;
+    font-size: 18px;
+    align-content: center;
+    background-color: #003366;
+    padding: 8px;
+    text-align: center;   
+    align-items: center;
+    justify-content: center;
+    display: block;
+    margin-bottom: 10px;
+}
+.table-container{
+    display: block;
+    text-align: center;
+}
+
+.table-container .table-caption{
+    background: #2d5db8;
+    color: white;
+    padding-top: 8px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+}
+.table-container table{
+    display: block;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+}
+.table-container table th{
+    font-weight: bold;
+}
+.table-container table th,.table-container table td{
+    height: 50px;
+}

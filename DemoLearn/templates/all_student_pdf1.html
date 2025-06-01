@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div class="top_h">
+      <div>
+          <h1>Government Polytechnic Srinagar (Garhwal), Uttarakhand</h1>
+      </div>
+  </div>
+  <div class="table-container">
+      <div class="table-caption"><h1>BATCH ({{sel_batch}})</h1></div>
+      <table class="student-table">
+          <thead>
+              <tr>
+                  <th>S.NO.</th>
+                  <th>Roll No</th>
+                  <th>Student Name</th>
+                  <th>Father Name</th>
+                  <th>Branch</th>
+                  <th>Sem/Year</th>
+                  <th>Phone</th>
+              </tr>
+          </thead>
+          <tbody>
+                  {% for student in student_detail %}
+                              <tr>
+                                  <td>{{ forloop.counter }}</td>
+                                  <td>{{student.ubter_roll_no}}</td>
+                                  <td>{{student.full_name}}</td>
+                                  <td>{{student.father_name}}</td>
+                                  <td>{{student.branch}}</td>
+                                  <td>{{student.sem}}/{{student.year}}</td>
+                                  <td>{{student.phone_no}}</td>
+                              </tr>
+                  {% endfor %}
+          </tbody>
+      </table>
+  </div>
+</body>
+</html>

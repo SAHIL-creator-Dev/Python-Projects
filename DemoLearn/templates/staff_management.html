@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery Management</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1e1e2f;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    #gallery-management {
+      margin: 20px auto;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #f1c40f;
+      margin-bottom: 30px;
+    }
+
+    .upload-card, .gallery-card {
+      background: #2a2a40;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .upload-card h3, .gallery-card h3 {
+      color: #f1c40f;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .gallery_upload {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .gallery_upload label {
+      font-weight: bold;
+      align-self: flex-start;
+    }
+
+    .upload-card input[type="text"],
+    .upload-card input[type="file"],
+    .upload-card button {
+      padding: 10px;
+      width: 80%;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .upload-card input[type="text"],
+    .upload-card input[type="file"] {
+      border: 1px solid #ccc;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    .upload-card button {
+      background: #f1c40f;
+      color: #2a2a40;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .upload-card button:hover {
+      background: #d4ac0d;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      background: #2a2a40;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .gallery-item h3 {
+      margin: 10px 0 5px;
+      color: #f1c40f;
+    }
+
+    .gallery-item p {
+      margin: 0 0 10px;
+    }
+
+    .remove-btn {
+      background: red;
+      color: white;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      width: 80%;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .remove-btn:hover {
+      background: darkred;
+    }
+
+    @media (max-width: 768px) {
+      .upload-card input,
+      .upload-card button {
+        width: 95%;
+      }
+    }
+    .top-right-link {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.see-gallery-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.see-gallery-btn:hover {
+    background-color: #2980b9;
+}
+  </style>
+</head>
+<body>
+  <div id="gallery-management">
+    <div class="top-right-link">
+        <a href="{% url 'staff' %}" class="see-gallery-btn">View Staff</a>
+    </div>
+    <h2>Gallery Management</h2>
+
+    <!-- Upload Section -->
+    <div class="upload-card">
+      <h3>Upload Teacher Image</h3>
+      <form action="{% url 'staff_management' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="gallery_upload">
+          <label for="teacher_name">Teacher's Name:</label>
+          <input type="text" name="teacher_name" id="teacher_name" placeholder="Enter teacher's name" required />
+
+          <label for="teacher_profession">Teacher Role:</label>
+          <input type="text" name="teacher_role" id="teacher_profession" placeholder="Enter teacher's Role" required />
+
+          <label for="gallery_img">Upload Image:</label>
+          <input type="file" accept="image/*" name="staff_img" id="gallery_img" required />
+
+          <button type="submit">Upload</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Gallery Display Section -->
+    <div class="gallery-card">
+      <h3>Gallery Images</h3>
+      <div class="gallery-grid">
+        {% for img in staff_all_data %}
+        <div class="gallery-item">
+          <img src="{{ img.staff_img.url }}" alt="Image of {{ img.teacher_name }}" />
+          <h3>{{ img.staff_name }}</h3>
+          <p>{{ img.staff_role }}</p>
+          <form method="post" action="{% url 'remove_staff_img' img.id %}">
+            {% csrf_token %}
+            <button type="submit" class="remove-btn">Remove</button>
+          </form>
+        </div>
+        {% empty %}
+        <p>No images found.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

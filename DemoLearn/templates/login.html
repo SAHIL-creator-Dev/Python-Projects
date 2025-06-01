@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Student LOGIN | Govt. Polytechnic Srinagar{% endblock %}
+{% block top_head %} {% endblock %}
+{% block body %}
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success' %}{% endif %}
+{% endfor %}
+{% endif %}
+
+<div class="login_body">
+  <form action="" method="post">
+    {% csrf_token %}
+  <div class="login-container">
+    <div class="imgcontainer">
+      <img src="{% static "logo.png" %}" alt="Avatar" class="avatar" />
+    </div>
+    <h2>Student Login</h2>
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'error' %}
+          <div class="alert_error">
+            <span class="error_sign">⚠</span>
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+            {{ message }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    <div class="container">
+      <label for="student_login_username"><b>Student Name: </b></label>
+      <input type="text" placeholder="Enter Full Name" name="student_login_username" required />
+      <span style="font-size: 12px; color: #666;" class="student_note">Enter your name in upper case</span>
+      <label for="student_roll_no"><b>UBTER ROLL NO: </b></label>
+      <input type="text" placeholder="Enter" name="stu_roll_no" required />
+
+      <label for="student_login_password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="student_login_password" required />
+
+      <button type="submit">Login</button>
+      {% comment %} <button type="reset" class="cancelbtn">Reset</button> {% endcomment %}
+    </div>
+    
+    <div class="psw">
+      <span>Faculty Access Portal: <a href="/teacher_login">Login Here</a></span>
+    </div>
+  </div>
+</form>
+</div>
+{% endblock %}
+{% block home_footer %}{% endblock %}

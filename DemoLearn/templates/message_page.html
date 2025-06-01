@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block top_head %} {% endblock %}
+{% block nav_bar %}{% endblock %}
+{% block marq %}{% endblock %}
+{% block title %}Student's Profile{% endblock %}
+{% block body %}
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'success' %}
+      <div class="outer_message_cont">
+        <div class="message_confirmation-container">
+            <div class="check-mark">✔</div>
+            <h2>Your Data Updated Successfully!</h2>
+            <p>{{message}}</p>
+            {% if side == 'student_side' %}
+              <a href="{% url "login" %}"><button class="return-button">Return to Login</button></a>
+            {% elif side == 'teacher_side' %}
+              <a href="{% url "teacher_view_page" batch branch_id %}"><button class="return-button">Return to Dashboard</button></a>
+            {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'error' %}
+      <div class="outer_error_message_cont">
+        <div class="error-container">
+            <i class="fas fa-exclamation-triangle fa-2x error-icon"></i>
+            <h1>Invalid Date Format</h1>
+            <p>{{message}}</p>
+            {% if side == 'student_side' %}
+              <a href="{% url "login" %}"><button class="return-button">Return to Login</button></a>
+            {% elif side == 'teacher_side' %}
+              <a href="{% url "teacher_student_select" %}"><button class="return-button">Return to Dashboard</button></a>
+            {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endblock %}

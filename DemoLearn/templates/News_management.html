@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Management</title>
+    <link rel="stylesheet" href="{% static '/Content_management/news.css' %}"> <!-- Added news.css -->
+</head>
+<body>
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+            {{ message }}
+        </div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    <!-- Back Button -->
+    <a href="/admin_panel" class="back-button">
+        ← <span>Back</span>
+    </a>
+
+    <div class="container">
+        <h2>News Management</h2>
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert_error">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+                {{ message }}
+            </div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="news-form">
+                <input type="text" name="news-title" placeholder="Enter News Title">
+                <textarea name="news-description" placeholder="Enter News Description"></textarea>
+                <button type="submit">Add News</button>
+            </div>
+        </form>
+        <div class="news-list">
+            <h3>Added News</h3>
+            {% for news in news_management %}
+            <div class="news-item">
+                <div>
+                    <strong>{{news.news_title}}</strong>
+                    <p>{{news.news_description}}</p>
+                </div>
+                <div class="news-actions">
+                    <form action="{% url "delete_news" news.id %}">
+                        <button type="submit">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+</html>

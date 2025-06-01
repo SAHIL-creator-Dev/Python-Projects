@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<!-- Main Container -->
+    <div class="photo_gallery_main_container">
+        <!-- Album Page -->
+        <div class="photo_gallery_body">
+          
+            <!-- Sliding Image Section -->
+            <section class="sliding-images">
+                <div class="slideshow-container">
+                    {% for img in gallery_data %}
+                    {% if img.image_type == 'slider' %}
+                    <div class="slide fade">
+                        <img src="{{img.gallery_img.url}}" alt="Image 1">
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section class="photo-gallery">
+                <h2>Photo Gallery</h2>
+                <div class="gallery-container">
+                    {% for img in gallery_data %}
+                    {% if img.image_type == 'gallery' %}
+                    <div class="gallery-item">
+                        <img src="{{img.gallery_img.url}}" alt="Gallery 2">
+                    </div>
+                    {% endif %}     
+                    {% endfor %}            
+                </div>
+            </section>
+        </div>
+    </div>
+    <script>
+        // gallery slide
+let slideIndexg = 0;
+
+function showSlides() {
+  let slides = document.getElementsByClassName("slide");
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slideIndexg++;
+  if (slideIndexg > slides.length) {
+    slideIndexg = 1;
+  }
+  slides[slideIndexg - 1].style.display = "block";
+  setTimeout(showSlides, 3000); // Change image every 3 seconds
+}
+showSlides();
+    </script>
+{% endblock %}

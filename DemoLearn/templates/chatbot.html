@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Chatbot with Typing Delay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 350px;
+            height: 500px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #fafafa;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user {
+            background-color: #DCF8C6;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .bot {
+            background-color: #E8E8E8;
+            align-self: flex-start;
+            text-align: left;
+        }
+
+        #typing {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+        }
+
+        #chat-form {
+            display: flex;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 0 0 15px 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        #chat-form button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #chat-form button:hover {
+            background-color: #45a049;
+        }
+
+        .clear-button {
+            background-color: #6c757d; /* Soft teal color */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: center;
+            margin: 10px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .clear-button:hover {
+            background-color: #5a6268; /* Darker shade */
+        }
+
+        .robot-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="header">
+        <h2>Help Desk</h2>
+    </div>
+
+    <div id="chat" class="chat-box">
+        <!-- Chat history will be displayed here -->
+        {% for chat in chat_history %}
+            <div class="message {{ chat.sender|lower }}">
+                <div class="{{ chat.sender|lower }}-icon robot-icon">
+                    {{ chat.sender|slice:":1" }}
+                </div>
+                <strong>{{ chat.sender }}:</strong> {{ chat.message }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="typing"></div>
+
+    <form method="POST" id="chat-form">
+        {% csrf_token %}
+        <input type="text" name="message" id="user-input" placeholder="Type your message..." required>
+        <button type="submit">Send</button>
+    </form>
+
+    <button class="clear-button" id="clear-btn">Clear Chat History</button>
+</div>
+
+<script>
+document.getElementById('chat-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop the normal form submit
+
+    const userInputField = document.getElementById('user-input');
+    const userInput = userInputField.value.trim();
+    if (!userInput) return;
+
+    // Step 1: Show user's message immediately
+    const chatDiv = document.getElementById('chat');
+    const userMessage = document.createElement('div');
+    userMessage.className = 'message user';
+    userMessage.innerHTML = `<div class="user-icon robot-icon">U</div><strong>You:</strong> ${userInput}`;
+    chatDiv.appendChild(userMessage);
+
+    // 🛠 NEW: Save user message temporarily
+    localStorage.setItem('pending_message', userInput);
+
+    userInputField.value = ''; // clear the input field
+
+    // Step 2: After 2 seconds, show "Bot is typing..."
+    setTimeout(() => {
+        const typingDiv = document.getElementById('typing');
+        typingDiv.textContent = "typing...";
+
+        // Step 3: After another 2 seconds, restore input and submit
+        setTimeout(() => {
+            typingDiv.textContent = "";
+
+            // 🛠 Restore the saved user input back into the form
+            userInputField.value = localStorage.getItem('pending_message') || '';
+            localStorage.removeItem('pending_message');
+
+            e.target.submit(); // Submit the form
+        }, 2000);
+
+    }, 500);
+});
+
+// Clear the chat history
+document.getElementById('clear-btn').addEventListener('click', function() {
+    // Send a request to the backend to clear chat history
+    fetch('/clear_chat_history/', {  // Use the exact same URL as defined in your urls.py
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value  // CSRF token handling
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Clear the chat box in the frontend
+            const chatDiv = document.getElementById('chat');
+            chatDiv.innerHTML = ''; // Clear all messages
+        } else {
+            console.error("Failed to clear chat history");
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+</script>
+
+</body>
+</html>

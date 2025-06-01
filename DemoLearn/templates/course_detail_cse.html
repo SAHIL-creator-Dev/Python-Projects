@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav_bar %}{% endblock %}
+{% block body %}
+<div class="course-details-container">
+        <header class="course-details-header">
+            {% block course_detal_header %}
+            <h1>Computer Science Engineering</h1>
+            <p>Explore the world of technology and innovation through the field of Computer Science Engineering.</p>
+            {% endblock course_detal_header %}
+            
+        </header>
+
+        <section class="course-details-what-is-cse">
+            {% block course_detail_what_is_section %}
+            <div class="course-details-cse-info">
+                <p>Computer Science Engineering (CSE) is an ever-evolving discipline that focuses on the design, development, and application of software systems, computing devices, and network infrastructure. It combines the principles of computer science with engineering techniques to solve real-world problems using computational methods and technology.</p>
+                <img src="{% static "computer.jpg" %}" alt="Computer Science Engineering" class="course-details-cse-image">
+            </div>
+            {% endblock course_detail_what_is_section %}
+        </section>
+
+        <div class="course-details-two-sections">
+            <div class="course-details-left-section">
+                <section class="course-details-section course-details-mission">
+                    <h2>Mission</h2>
+                    {% block course_detail_mission %}
+                    <ul>
+                        <li>To provide a comprehensive education in Computer Science Engineering.</li>
+                        <li>To equip students with practical knowledge of emerging technologies.</li>
+                        <li>To encourage innovation and problem-solving in the real world.</li>
+                    </ul>
+                    {% endblock course_detail_mission %}
+
+                </section>
+
+                <section class="course-details-section course-details-vision">
+                    <h2>Vision</h2>
+                    {% block course_detail_vision %}
+                    <ul>
+                        <li>To be recognized as a leading department in technological advancements.</li>
+                        <li>To create professionals who contribute to solving global challenges.</li>
+                        <li>To cultivate research and innovation in the computing field.</li>
+                    </ul>
+                    {% endblock course_detail_vision %}
+
+                </section>
+
+                <section class="course-details-section course-details-peo">
+                    <h2>Program Educational Objectives (PEO)</h2>
+                    {% block course_detail_poe %}
+                    <ul>
+                        <li>PEO 1: Graduates will be equipped with strong foundations in computer science and engineering.</li>
+                        <li>PEO 2: Graduates will be prepared for successful careers in the tech industry.</li>
+                        <li>PEO 3: Graduates will be leaders who solve complex real-world problems.</li>
+                    </ul>
+                    {% endblock course_detail_poe %}
+
+                </section>
+
+                <section class="course-details-section course-details-outcomes">
+                    {% block course_detail_prOut %}
+                    <h2>Program Outcomes</h2>
+                    <ul>
+                        <li>PO 1: Ability to apply knowledge of mathematics and computer science principles.</li>
+                        <li>PO 2: Ability to design and develop software solutions for complex problems.</li>
+                        <li>PO 3: Ability to work in multidisciplinary teams and communicate effectively.</li>
+                    </ul>
+                    {% endblock course_detail_prOut %}
+
+                </section>
+            </div>
+
+            <div class="course-details-right-section">
+                <div class="course-details-profile">
+                    {% block course_detail_profile %}
+                    <img src="computer.jpg" alt="H.O.D. Profile" class="course-details-circular-image">
+                    <h3></h3>
+                    <p>H.O.D., Department of Computer Science Engineering</p>
+                    <p></p>
+                    {% endblock course_detail_profile %}
+
+                </div>
+
+                <section class="course-details-future-scopes">
+                 {% block course_detail_future_scop %}
+                 <h2>Future Scopes in Computer Science Industries</h2>
+                 <ul>
+                  <li><strong>Artificial Intelligence and Machine Learning</li>
+                  <li><strong>Cybersecurity</li>
+                  <li><strong>Data Science and Big Data</li>
+                  <li><strong>Blockchain Technology</li>
+                  <li><strong>Cloud Computing</li>
+                  <li><strong>Internet of Things (IoT)</li>
+                  <li><strong>Robotics.</li>
+                 </ul>
+                 {% endblock course_detail_future_scop %}
+
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+

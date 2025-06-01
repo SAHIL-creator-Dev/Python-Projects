@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block top_head %} {% endblock %}
+{% block nav_bar %}{% endblock %}
+{% block marq %}{% endblock %}
+{% block title %}Student's Profile{% endblock %}
+{% block body %}
+   <div class="delete_outer_div">
+        <div class="delete_message_container">
+            <div class="success-icon">✔️</div>
+            <div class="success-message">Student Profile Deleted</div>
+            <div class="sub-message">The student's profile has been successfully removed from the system.</div>
+            <a href="{% url 'teacher_view_page' batch branch_id %}" class="home-link">Return to Dashboard</a>
+        </div>
+   </div>
+{% endblock %}

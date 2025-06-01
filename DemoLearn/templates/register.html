@@ -1,0 +1,51 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}Student SIGN-UP | Govt. Polytechnic Srinagar{% endblock %}
+{% block top_head %} {% endblock %}
+{% block body %}
+
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'success' %}
+      <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+        {{ message }}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+<section class="reg_section">
+  <div class="reg_container">
+    <div class="logo_container">
+        <img src="{% static "logo.png" %}" alt="Logo">
+    </div>
+    <h2>SIGN-UP</h2>
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'error' %}
+          <div class="alert_error">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+            {{ message }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="student_name">Student Name:</label>
+        <input type="text" id="student_name" name="student_name" placeholder="Enter Your name" required>
+        <label for="student_email">Email:</label>
+        <input type="email" id="student_email" name="student_email" placeholder="example@gmail.com" required>
+        <label for="stu_password">Password:</label>
+        <input type="password" id="stu_password" name="stu_password" placeholder="Enter" required>
+        <label for="confirm_stu_password">Confirm Password:</label>
+        <input type="password" id="confirm_stu_password" name="confirm_stu_password" placeholder="Enter" required>
+        <input type="submit" value="Sign-up">
+        <div class="psw">
+            <span>Are you a faculty member? <a href="/teacher_register">Sign-up here</a></span>
+        </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
+{% block home_footer %}{% endblock %}

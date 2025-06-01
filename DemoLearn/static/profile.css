@@ -1,0 +1,146 @@
+/* Global Styles */
+@page {
+    size: A4 portrait;
+    margin: 1.5cm;
+}
+
+@media print and (orientation: landscape) {
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+    
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.student-profile-container {
+    width: 90%;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+ 
+
+
+/* Header Styling */
+.profile-header {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: left;
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: block;
+}
+/* Section Headings */
+ h2 {
+    background: #2d5db8;
+    color: white;
+    padding: 8px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    /* background-color: #2d5db8; */
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #e1e8f2;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .student-profile-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .profile-header {
+        font-size: 18px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    table th, table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+.personal-details .name_h1{
+    color: #2d5db8;
+    
+}
+.top_h {
+  background-color: #003366;
+  color: #fff;
+  padding: 8px;
+  text-align: center;   
+  align-items: center;
+  justify-content: center;
+  display: block;
+  margin-bottom: 10px;
+}
+.top_h h1{
+  margin: 0;
+  color: #f0e68c;
+  font-size: 18px;
+}
+.previous-academic table, .current-academic table{
+    border: 1px solid #ccc;
+}
+.previous-academic table th, .current-academic table th,.previous-academic table td, .current-academic table td{
+    text-align:center;
+}
+.previous-academic table th,.previous-academic table td{
+    height: 50px;
+}
+.current-academic table th,.current-academic table td{
+    height: 30px;
+}

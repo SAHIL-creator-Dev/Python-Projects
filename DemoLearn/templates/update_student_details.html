@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Update Detail{% endblock %}
+{% block nav_bar %}{% endblock %}
+{% block note %}Please update your profile to ensure your information is accurate and current.{% endblock %}
+{% block body %}
+
+{% comment %} <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+        Welcome, Students!<br>Please fill out this form carefully with your details. Your information is important to us. Thank you for your cooperation!
+</div> {% endcomment %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{ message.tags }}">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+        {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="all_student_detail">
+    <div class="student_container">
+        <div class="student_logo_container">
+            <img src="{% static "logo.png" %}" alt="Logo">
+        </div>
+        <h2>Update Details</h2>
+        {% for student in student_detail %}
+            <form action="{% url "update" student.id 'teacher_side' branch_id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="personal_det">
+                    <h3>Personal Details - </h3>
+                    <hr><br>
+                    <div class="update_same_div">
+                        <div class="update_same_div1">
+                            <div class="profile_image">
+                                {% if student.img %}
+                                    <img src="{{student.img.url}}" alt="img">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="update_same_div2">
+                            <label for="student_img">Update Image:</label>
+                            <input type="file" id="student_img" name="student_img" value="student.img">
+                        </div>
+                        
+                    </div>
+                    <label for="full_name">Student's Full Name :</label>
+                    <input type="text" id="full_name" name="full_name" value="{{student.full_name}}" required>  
+                    <div class="same_div">
+                        <div class="same_div1">
+                            <label for="fathers_name">Father's Name:</label>
+                            <input type="text" id="fathers_name" name="fathers_name" value="{{student.father_name}}" required>
+                        </div>
+                        <div class="same_div2">
+                            <label for="father_occupation">Father's Occupations:</label>
+                            <input type="text" id="father_occupation" name="father_occupation" value="{{student.father_occupation}}" required>
+                        </div>
+                    </div>
+                    <div class="same_div">
+                        <div class="same_div1">
+                            <label for="mothers_name">Mother's Name:</label>
+                            <input type="text" id="mothers_name" name="mothers_name" value="{{student.mother_name}}" required>
+                        </div>
+                        <div class="same_div2">
+                            <label for="mother_occupation">Mother's Occupations:</label>
+                            <input type="text" id="mother_occupation" name="mother_occupation" value="{{student.mother_occupation}}" required>
+                        </div>
+                    </div>
+
+                    <div class="same_div">
+                        <div class="same_div1">
+                            <label for="current_address">Current Address:</label>
+                            <textarea name="current_address" id="current_address" rows="4" cols="60" placeholder="Enter">{{student.current_stu_address}}</textarea>
+                        </div>
+                        <div class="same_div2">
+                            <label for="permanent_address">Permanent Address:</label>
+                            <textarea name="permanent_address" rows="4" cols="60" id="permanent_address" >{{student.permanent_stu_address}}</textarea>
+                        </div>
+                    </div>
+                    <div class="same_div">
+                        <div class="same_div1">
+                            <label for="dob">Date of Birth:</label>
+                            <input type="text" id="dob" name="dob" value="{{student.dob}}" placeholder="dd/mm/yy" required>
+                        </div>
+                        <div class="same_div2">
+                            <label for="category">Category:</label>
+                            <select id="category" name="category" required>
+                                <option value="{{student.category}}">{{student.category}} (Current)</option>
+                                <option value="GEN">GEN</option>
+                                <option value="OBC">OBC</option>
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                                <option value="EWS">EWS</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="same_div">
+                        <div class="same_div1">
+                            <label for="phone">Student's Phone No.:</label>
+                            <input type="tel" id="phone" name="phone" value="{{student.phone_no}}" required>
+                        </div>
+                        <div class="same_div2">
+                            <label for="parent_phone">Parent's Phone No.:</label>
+                            <input type="tel" id="parent_phone" name="parent_phone" value="{{student.parent_phone}}" required>   
+                        </div>
+                    </div>
+            
+                    <div class="same_div">
+                        <div class="same_div1">
+                            <label for="adhar_no">Enter Adhar number :</label>
+                            <input type="number" id="adhar_no" name="adhar_no" value="{{student.adhar_no}}" required>
+                        </div>
+                        <div class="same_div2">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="{{student.email}}" required>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="Edu_details">
+                    <h3>Current Academic Profile - </h3>
+                    <hr><br>
+                    <label for="ubter_roll_no">Enter your UBTER Roll No. :</label>
+                    <input type="text" id="ubter_roll_no" name="ubter_roll_no" placeholder="UBTER Roll No" value="{{student.ubter_roll_no}}" required>
+                    <label for="branch">Branch:</label>
+                    <select id="branch" name="branch" required>
+                        <option value="{{student.branch}}">{{student.branch}} (current)</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="Electronics Engineering">Electronics Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Mechanical Engineering (Automobile)">Mechanical Engineering (Automobile)</option>
+                        <option value="Electrical Engineering">Electrical Engineering</option>
+                        <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                    </select>
+                    <div class="same_div">
+                        <div class="same_div1">
+                            <label for="year">Current Year:</label>
+                            <select id="year" name="year">
+                                <option value="{{student.year}}">{{student.year}} (current)</option>
+                                <option value="1st">1st</option>
+                                <option value="2nd">2nd</option>
+                                <option value="3rd">3rd</option>
+                            </select>
+                        </div>
+                        <div class="same_div2">
+                            <label for="semester">Current Semester:</label>
+                            <select id="semester" name="semester">
+                                <option value="{{student.sem}}">{{student.sem}} (current)</option>
+                                <option value="1st">1th</option>
+                                <option value="2nd">2nd</option>
+                                <option value="3rd">3rd</option>
+                                <option value="4th">4th</option>
+                                <option value="5th">5th</option>
+                                <option value="6th">6th</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="student_note">
+                        <span >Note : Please leave this field blank if it does not apply to you.</span>
+                    </div>
+                    <fieldset class="year_marks_border">
+                        <legend>1st year</legend>
+                        <div class="year_marks">
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="first_sem_marks">1st Semester Marks :</label>
+                                    <input type="number" id="first_sem_marks" name="first_sem_marks" placeholder="First semester marks" value="{{student.first_sem_marks}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="second_sem_marks">2nd Semester Marks :</label>
+                                    <input type="number" id="second_sem_marks" name="second_sem_marks" placeholder="Second semester marks" value="{{student.second_sem_marks}}">
+                                </div>  
+                            </div>
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="first_year_tot_cgpa">1st Year Total CGPA :</label>
+                                    <input type="number" id="first_year_tot_cgpa" name="first_year_tot_cgpa" step="0.01" placeholder="CGPA" value="{{student.first_year_tot_cgpa}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="first_year_tot_per">1st Year Total Percentage (%) :</label>
+                                    <input type="number" id="first_year_tot_per" name="first_year_tot_per" step="0.01" placeholder="%" value="{{student.first_year_tot_per}}">
+                                </div>  
+                            </div>
+                            
+                        </div>
+                    </fieldset>
+                    <hr>
+                    <span class="student_note">Note : Please leave this field blank if it does not apply to you.</span>
+                    <fieldset class="year_marks_border">
+                        <legend>2nd year</legend>
+                        <div class="year_marks">
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="third_sem_marks">3rd Semester Marks :</label>
+                                    <input type="number" id="third_sem_marks" name="third_sem_marks" placeholder="Third semester marks" value="{{student.third_sem_marks}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="forth_sem_marks">4th Semester Marks :</label>
+                                    <input type="number" id="forth_sem_marks" name="forth_sem_marks" placeholder="Forth semester marks" value="{{student.forth_sem_marks}}">
+                                </div>  
+                            </div>
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="second_year_tot_cgpa">2nd Year Total CGPA :</label>
+                                    <input type="number" id="second_year_tot_cgpa" name="second_year_tot_cgpa" step="0.01" placeholder="CGPA" value="{{student.second_year_tot_cgpa}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="second_year_tot_per">2nd Year Total Percentage (%) :</label>
+                                    <input type="number" id="second_year_tot_per" name="second_year_tot_per" step="0.01" placeholder="%" value="student.second_year_tot_per">
+                                </div>  
+                            </div>
+                            
+                        </div>
+                    </fieldset>
+                    <hr>
+                    <span class="student_note">Note : Please leave this field blank if it does not apply to you.</span>
+                    <fieldset class="year_marks_border">
+                        <legend>3rd year</legend>
+                        <div class="year_marks">
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="fifth_sem_marks">5th Semester Marks :</label>
+                                    <input type="number" id="fifth_sem_marks" name="fifth_sem_marks" size="4" placeholder="Fifth semester marks" value="{{student.fifth_sem_marks}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="sixth_sem_marks">6th Semester Marks :</label>
+                                    <input type="number" id="sixth_sem_marks" name="sixth_sem_marks" size="4" placeholder="Sixth semester marks" value="{{student.sixth_sem_marks}}">
+                                </div>  
+                            </div>
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="third_year_tot_cgpa">3rd Year Total CGPA :</label>
+                                    <input type="number" id="third_year_tot_cgpa" name="third_year_tot_cgpa" step="0.01" placeholder="CGPA" value="{{student.third_year_tot_cgpa}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="third_year_tot_per">3rd Year Total Percentage (%) :</label>
+                                    <input type="number" id="third_year_tot_per" name="third_year_tot_per" step="0.01" placeholder="%" value="{{student.third_year_tot_per}}">
+                                </div>  
+                            </div>
+                            
+                        </div>
+                    </fieldset>
+                    <span class="student_note">Note : Please don't leave this field blank.</span>
+                    <label for="passing_year">Batch : </label>
+                    <input type="text" name="passing_year" id="passing_year" placeholder="e.g., 2023-2026" value="{{student.passing_year}}" required>
+                </div>
+                <div class="Edu_details">
+                    <h3>Previous Academic Background - </h3>
+                    <hr><br>
+                    <fieldset class="year_marks_border">
+                        <legend>10th Qualification</legend>
+                        <div class="year_marks">
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="high_sc_name">High School Name :</label>
+                                    <input type="text" id="high_sc_name" name="high_sc_name" placeholder="Enter" value="{{student.high_sc_name}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="sel_high_board">Select Board :</label>
+                                    <select id="sel_high_board" name="sel_high_board" required>
+                                        <option value="{{student.sel_high_board}}">{{student.sel_high_board}} (current)</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">Uttarakhand Board of School Education (UBSE)</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">Central Board of Secondary Education (CBSE)</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">Council for the Indian School Certificate Examinations (CISCE)</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">National Institute of Open Schooling (NIOS)</option>
+                                    </select>
+                                </div>  
+                            </div>
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="high_sc_pass_year">Year of Completion :</label>
+                                    <input type="number" id="high_sc_pass_year" name="high_sc_pass_year" placeholder="Passing year" value="{{student.high_sc_pass_year}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="high_sc_per">10th percentage (%) :</label>
+                                    <input type="number" id="high_sc_per" name="high_sc_per" step="0.01" required placeholder="10th %" value="{{student.high_sc_per}}">
+                                </div>  
+                            </div>
+                        </div>
+                    </fieldset>
+                    <span class="student_note">Note : Please leave this field blank if it does not apply to you.</span>
+                    <fieldset class="year_marks_border">
+                        <legend>12th Qualification</legend>
+                        <div class="year_marks">
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="inter_col_name">Inter College Name :</label>
+                                    <input type="text" id="inter_col_name" name="inter_col_name" placeholder="Enter" value="{{student.inter_col_name}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="sel_inter_board">Select Board :</label>
+                                    <select id="sel_inter_board" name="sel_inter_board" required>
+                                        <option value="{{student.sel_inter_board}}">{{student.sel_inter_board}}</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">Uttarakhand Board of School Education (UBSE)</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">Central Board of Secondary Education (CBSE)</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">Council for the Indian School Certificate Examinations (CISCE)</option>
+                                        <option value="Uttarakhand Board of School Education (UBSE)">National Institute of Open Schooling (NIOS)</option>
+                                    </select>
+                                </div>  
+                            </div>
+                            <div class="same_marks_div">
+                                <div class="same_marks_div1">
+                                    <label for="inter_col_pass_year">Year of Completion :</label>
+                                    <input type="number" id="inter_col_pass_year" name="inter_col_pass_year" placeholder="Passing year" value="{{student.inter_col_pass_year}}">
+                                </div>
+                                <div class="same_marks_div2">
+                                    <label for="inter_per">12th percentage (%) :</label>
+                                    <input type="number" id="inter_per" name="inter_per" step="0.01" placeholder="12th %" value="{{student.inter_per}}">
+                                </div>  
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <br><br>
+                <hr>
+                <input type="submit" value="Save Detail">
+            </form>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block home_footer %}{% endblock %}

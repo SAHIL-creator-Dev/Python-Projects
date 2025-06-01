@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Event Management</title>
+    <link rel="stylesheet" href="{% static "/Content_management/event.css" %}">
+</head>
+<body>
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+            {{ message }}
+        </div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    <!-- Back Button -->
+    <a href="/admin_panel" class="back-button">
+        ← <span>Back</span>
+    </a>
+
+    <div class="container">
+        <h2>Upcoming Event Management</h2>
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert_error">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+                {{ message }}
+            </div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="event-form">
+            <input type="text" name="event-title" placeholder="Enter Event Title">
+            <textarea name="event-description" placeholder="Enter Event Description"></textarea>
+            <button>Add Event</button>
+        </div>
+        </form>
+        <div class="event-list">
+            <h3>Added Events</h3>
+            {% for event in event_management %}
+            <div class="event-item">
+                <div class="event-details">
+                    <strong>{{event.event_title}}</strong>
+                    <p>{{event.event_description}}</p>
+                </div>
+                <div class="event-actions">
+                    <form action="{% url "delete_event" event.id %}">
+                        <button type="submit">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
